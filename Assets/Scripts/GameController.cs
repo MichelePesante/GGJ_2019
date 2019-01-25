@@ -1,0 +1,16 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GameController : MonoBehaviour {
+
+	public List<GameObject> players = new List<GameObject>();
+
+	void Start () {
+		
+	}
+	
+	void Update () {
+		
+	}
+}
