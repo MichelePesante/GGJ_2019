@@ -141,9 +141,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ac0767110830ae43af469dd3b4cdef7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementSpeed: 2
-  isFreezed: 0
-  isInverted: 0
+  StartingMovementSpeed: 5
+  CurrentConfusionType: 0
+  IsFreezed: 0
+  IsConfused: 0
+  IsSlowed: 0
+  IsFaster: 0
 --- !u!65 &101469737
 BoxCollider:
   m_ObjectHideFlags: 0

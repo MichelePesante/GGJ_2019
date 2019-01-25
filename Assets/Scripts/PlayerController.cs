@@ -1,23 +1,26 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = System.Random;
 
 public class PlayerController : MonoBehaviour
 {
-    public float MovementSpeed;
+    public float StartingMovementSpeed;
 
-    private Vector3 normalMovement;
-    private Vector3 invertedMovement;
-    private Vector3 flippedMovement;
-    private Vector3 invertedFlippedMovement;
+    private float currentMovementSpeed;
+
+    public ConfusionType CurrentConfusionType;
 
     [Header("Perks Bool")]
     public bool IsFreezed;
-    public bool IsInverted;
+    public bool IsConfused;
+    public bool IsSlowed;
+    public bool IsFaster;
 
     void Start()
     {
-
+        ResetMovementSpeed();
     }
 
     void Update()
@@ -26,12 +29,22 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            IsFreezed = !IsFreezed;
+            EnableFreezedPerk();
         }
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            IsInverted = !IsInverted;
+            EnableConfusedPerk();
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            EnableSlowedPerk(1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            EnableFasterPerk(1);
         }
     }
 
@@ -39,20 +52,119 @@ public class PlayerController : MonoBehaviour
     {
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
-        
-        if (!IsFreezed && !IsInverted)
-        {
-            transform.position += SetNormalMovement(x, z);
-        }
 
-        else if (IsInverted)
+        if (!IsFreezed)
         {
-
+            if (IsConfused)
+            {
+                switch (CurrentConfusionType)
+                {
+                    case ConfusionType.Inverted:
+                        transform.position += SetInvertedMovement(x, z);
+                        break;
+                    case ConfusionType.Flipped:
+                        transform.position += SetFlippedMovement(x, z);
+                        break;
+                    case ConfusionType.InvertedFlipped:
+                        transform.position += SetInvertedFlippedMovement(x, z);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                transform.position += SetNormalMovement(x, z);
+            }
         }
     }
 
     private Vector3 SetNormalMovement(float x, float z)
     {
-        return normalMovement = new Vector3(x * MovementSpeed * Time.deltaTime, 0f, z * MovementSpeed * Time.deltaTime);
+        return new Vector3(x * currentMovementSpeed * Time.deltaTime, 0f, z * currentMovementSpeed * Time.deltaTime);
     }
+
+    private Vector3 SetInvertedMovement(float x, float z)
+    {
+        return new Vector3(-x * currentMovementSpeed * Time.deltaTime, 0f, -z * currentMovementSpeed * Time.deltaTime);
+    }
+
+    private Vector3 SetFlippedMovement(float x, float z)
+    {
+        return new Vector3(z * currentMovementSpeed * Time.deltaTime, 0f, x * currentMovementSpeed * Time.deltaTime);
+    }
+
+    private Vector3 SetInvertedFlippedMovement(float x, float z)
+    {
+        return new Vector3(-z * currentMovementSpeed * Time.deltaTime, 0f, -x * currentMovementSpeed * Time.deltaTime);
+    }
+
+    public void ResetMovementSpeed()
+    {
+        currentMovementSpeed = StartingMovementSpeed;
+    }
+
+    #region Perks
+
+    public void EnableFreezedPerk()
+    {
+        IsFreezed = true;
+    }
+
+    public void DisableFreezedPerk()
+    {
+        IsFreezed = false;
+    }
+
+    public void EnableConfusedPerk()
+    {
+        IsConfused = true;
+        Array values = Enum.GetValues(typeof(ConfusionType));
+        Random random = new Random();
+        CurrentConfusionType = (ConfusionType)values.GetValue(random.Next(values.Length));
+    }
+
+    public void DisableConfusedPerk()
+    {
+        IsConfused = false;
+    }
+
+    public void EnableSlowedPerk(float speedToSub)
+    {
+        IsSlowed = true;
+        currentMovementSpeed -= speedToSub;
+    }
+
+    public void DisableSlowedPerk()
+    {
+        IsSlowed = false;
+        ResetMovementSpeed();
+    }
+
+    public void EnableFasterPerk(float speedToAdd)
+    {
+        IsFaster = true;
+        currentMovementSpeed += speedToAdd;
+    }
+
+    public void DisableFasterPerk()
+    {
+        IsFaster = false;
+        ResetMovementSpeed();
+    }
+
+    public void DisableAllPerks()
+    {
+        DisableFreezedPerk();
+        DisableConfusedPerk();
+    }
+
+    #endregion
+}
+
+public enum ConfusionType
+{
+    Inverted = 0,
+    Flipped = 1,
+    InvertedFlipped = 2
 }
