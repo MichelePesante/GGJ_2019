@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
 {
     public float StartingMovementSpeed;
 
+    public Perk perk;
+
     private float currentMovementSpeed;
 
     public ConfusionType CurrentConfusionType;
