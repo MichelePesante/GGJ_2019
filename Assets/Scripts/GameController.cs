@@ -4,13 +4,43 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour {
 
-	public List<GameObject> players = new List<GameObject>();
+	public List<PlayerController> players = new List<PlayerController>();
 
-	void Start () {
-		
-	}
-	
-	void Update () {
-		
-	}
+    public void TriggerFreezedPerk (PlayerController perkOwner)
+    {
+        foreach (PlayerController player in players)
+        {
+            if (player != perkOwner)
+            {
+                player.EnableFreezedPerk();
+            }
+        }
+    }
+
+    public void TriggerConfusedPerk (PlayerController perkOwner)
+    {
+        foreach (PlayerController player in players)
+        {
+            if (player != perkOwner)
+            {
+                player.EnableConfusedPerk();
+            }
+        }
+    }
+
+    public void TriggerSlowedPerk(PlayerController perkOwner, float slowAmount)
+    {
+        foreach (PlayerController player in players)
+        {
+            if (player != perkOwner)
+            {
+                player.EnableSlowedPerk(slowAmount);
+            }
+        }
+    }
+
+    public void TriggerFasterPerk(PlayerController perkOwner, float speedAmount)
+    {
+        perkOwner.EnableFasterPerk(speedAmount);
+    }
 }
