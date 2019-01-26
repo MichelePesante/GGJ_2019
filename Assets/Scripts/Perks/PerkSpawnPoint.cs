@@ -21,6 +21,7 @@ public class PerkSpawnPoint : MonoBehaviour {
 	}
 
 	private void spawnNewPerk() {
+		resetTimer();
 		Random rnd = new Random();
 		Instantiate(perksPrefab[rnd.Next(0, perksPrefab.Count)], transform.position, Quaternion.identity).transform.SetParent(gameObject.transform);
 	}
