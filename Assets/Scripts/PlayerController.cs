@@ -6,6 +6,8 @@ using Random = System.Random;
 
 public class PlayerController : MonoBehaviour
 {
+    public PlayerNumber CurrentPlayerNumber;
+
     public float StartingMovementSpeed;
 
     public Perk CurrentPerk;
@@ -49,17 +51,31 @@ public class PlayerController : MonoBehaviour
             EnableFasterPerk(1);
         }
 
-        if (Input.GetButtonDown("Perk") && CurrentPerk != null)
-        {
-            CurrentPerk.TriggerPerk(this);
-            RemovePersonalPerk();
-        }
+        UsePerk();
     }
 
     public void MovePlayer()
     {
-        float x = Input.GetAxisRaw("Horizontal");
-        float z = Input.GetAxisRaw("Vertical");
+        float x = 0f;
+        float z = 0f;
+
+        switch (CurrentPlayerNumber)
+        {
+            case PlayerNumber.Number_1:
+                x = Input.GetAxisRaw("Horizontal_Player1");
+                z = Input.GetAxisRaw("Vertical_Player1");
+                break;
+            case PlayerNumber.Number_2:
+                x = Input.GetAxisRaw("Horizontal_Player2");
+                z = Input.GetAxisRaw("Vertical_Player2");
+                break;
+            case PlayerNumber.Number_3:
+                break;
+            case PlayerNumber.Number_4:
+                break;
+            default:
+                break;
+        }
 
         if (!IsFreezed)
         {
@@ -87,6 +103,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void UsePerk()
+    {
+        if ((Input.GetButtonDown("Perk_1") && CurrentPerk != null && CurrentPlayerNumber == PlayerNumber.Number_1) ||
+            (Input.GetButtonDown("Perk_2") && CurrentPerk != null && CurrentPlayerNumber == PlayerNumber.Number_2))
+        {
+            CurrentPerk.TriggerPerk(this);
+            RemovePersonalPerk();
+        }
+    }
+
     private Vector3 SetNormalMovement(float x, float z)
     {
         return new Vector3(x * currentMovementSpeed * Time.deltaTime, 0f, z * currentMovementSpeed * Time.deltaTime);
@@ -110,6 +136,12 @@ public class PlayerController : MonoBehaviour
     public void ResetMovementSpeed()
     {
         currentMovementSpeed = StartingMovementSpeed;
+    }
+
+    public PlayerController IdentifyPlayer (int playerNumber)
+    {
+        CurrentPlayerNumber = (PlayerNumber)Enum.GetValues(typeof(PlayerNumber)).GetValue(playerNumber);
+        return this;
     }
 
     #region Perks
@@ -190,4 +222,12 @@ public enum ConfusionType
     Inverted = 0,
     Flipped = 1,
     InvertedFlipped = 2
+}
+
+public enum PlayerNumber
+{
+    Number_1 = 0,
+    Number_2 = 1,
+    Number_3 = 2,
+    Number_4 = 3
 }
