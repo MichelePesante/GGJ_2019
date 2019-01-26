@@ -16,11 +16,18 @@ public class GameController : MonoBehaviour
     private void Awake()
     {
         playerSpawnPoints = GameObject.FindGameObjectsWithTag("PlayerSpawnPoint").ToList();
+        
+        List<string> playersPrefsName = new List<string>{"player1", "player2", "player3", "player4"};
 
-        for (int i = 0; i < PlayerToSpawn; i++)
-        {
-            players.Add(Instantiate(PlayerPrefab, playerSpawnPoints[i].transform.position, Quaternion.identity).IdentifyPlayer(i));
+        for (var i = 0; i < 4; i++) {
+            if(PlayerPrefs.GetInt(playersPrefsName[i]) == 1)
+                players.Add(Instantiate(PlayerPrefab, playerSpawnPoints[i].transform.position, Quaternion.identity).IdentifyPlayer(i));
         }
+
+        //for (int i = 0; i < PlayerToSpawn; i++)
+        //{
+        //    players.Add(Instantiate(PlayerPrefab, playerSpawnPoints[i].transform.position, Quaternion.identity).IdentifyPlayer(i));
+        //}
     }
 
     private void Update()
