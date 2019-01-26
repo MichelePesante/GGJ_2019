@@ -16,10 +16,11 @@ public class PlayerController : MonoBehaviour
 
     private float currentMovementSpeed;
 
-    [SerializeField]
     private bool oldTriggerHeld;
 
     public ConfusionType CurrentConfusionType;
+
+    private GameController gameController;
 
     private string DoorButton;
     private string HorizontalAxis;
@@ -38,6 +39,7 @@ public class PlayerController : MonoBehaviour
     {
         meshRenderer = GetComponentInChildren<MeshRenderer>();
         sm = GetComponent<PlayerStateMachine>();
+        gameController = FindObjectOfType<GameController>();
     }
 
     void Start()
@@ -202,6 +204,12 @@ public class PlayerController : MonoBehaviour
         return this;
     }
 
+    public void OpenDoor(Collider other)
+    {
+        sm.SetDoorTrigger();
+        other.GetComponent<Door>().openClose();
+    }
+
     #region Perks
 
     public void EnableFreezedPerk()
@@ -286,12 +294,11 @@ public class PlayerController : MonoBehaviour
         {
             other.GetComponent<Door>().lightUp();
         }
-    }
 
-    public void OpenDoor(Collider other)
-    {
-        sm.SetDoorTrigger();
-        other.GetComponent<Door>().openClose();
+        if (other.GetComponent<Throne>() != null && other.GetComponent<Throne>().isActive)
+        {
+            gameController.GoToVictoryScreen();
+        }
     }
 
     private void OnTriggerStay(Collider other)

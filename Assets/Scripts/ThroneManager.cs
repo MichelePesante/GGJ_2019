@@ -41,8 +41,6 @@ public class ThroneManager : MonoBehaviour {
 		if(timer.CheckTimer(duration)) {
 			ActiveRandomThrone();
 		}
-
-		print(timer.GetTimer());	
 	}
 
 	public void ActiveRandomThrone() {

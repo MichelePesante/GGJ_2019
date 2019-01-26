@@ -176,5 +176,11 @@ public class GameController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
+    public void GoToVictoryScreen()
+    {
+        // Vai allo screen di vittoria
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+    }
+
     #endregion
 }
