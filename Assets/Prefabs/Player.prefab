@@ -56,6 +56,8 @@ GameObject:
   - component: {fileID: 4631210219781252}
   - component: {fileID: 65430428741079646}
   - component: {fileID: 54961074598777154}
+  - component: {fileID: 95720914390993174}
+  - component: {fileID: 114869634787064404}
   - component: {fileID: 114238937010865472}
   m_Layer: 0
   m_Name: Player
@@ -228,6 +230,24 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &95720914390993174
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1761265086923228}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 63d0d6e0c8a632f45b064c72a4dd7b5e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114238937010865472
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -247,3 +267,14 @@ MonoBehaviour:
   IsConfused: 0
   IsSlowed: 0
   IsFaster: 0
+--- !u!114 &114869634787064404
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1761265086923228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e35fbc91d2277b4fa2a2ba07a7b6df7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

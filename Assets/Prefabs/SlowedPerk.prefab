@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 5
-  perkValue: 3
+  perkMultiplier: 0.5
 --- !u!135 &135396303915911642
 SphereCollider:
   m_ObjectHideFlags: 1

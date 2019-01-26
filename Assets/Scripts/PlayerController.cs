@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public ConfusionType CurrentConfusionType;
 
     private MeshRenderer meshRenderer;
+    private PlayerStateMachine sm;
 
     [Header("Perks Bool")]
     public bool IsFreezed;
@@ -24,8 +25,10 @@ public class PlayerController : MonoBehaviour
     public bool IsSlowed;
     public bool IsFaster;
 
-    private void Awake() {
+    private void Awake()
+    {
         meshRenderer = GetComponentInChildren<MeshRenderer>();
+        sm = GetComponent<PlayerStateMachine>();
     }
 
     void Start()
@@ -74,7 +77,7 @@ public class PlayerController : MonoBehaviour
         UsePerk();
     }
 
-    public void MovePlayer(String horizontalAxisName, String verticalAxisName)
+    public void MovePlayer(string horizontalAxisName, string verticalAxisName)
     {
         float x = 0f;
         float z = 0f;
@@ -82,32 +85,46 @@ public class PlayerController : MonoBehaviour
         x = Input.GetAxisRaw(horizontalAxisName);
         z = Input.GetAxisRaw(verticalAxisName);
 
-        if (new Vector3(x, 0f, z) != Vector3.zero) {
-            meshRenderer.transform.rotation = Quaternion.LookRotation(new Vector3(x, 0f, z));
-        }
-
-        if (!IsFreezed)
+        if (x == 0 && z == 0)
         {
-            if (IsConfused)
+            sm.SetMovingBool(false);
+        }
+        else
+        {
+            if (!IsFreezed)
             {
-                switch (CurrentConfusionType)
+                if (new Vector3(x, 0f, z) != Vector3.zero)
                 {
-                    case ConfusionType.Inverted:
-                        transform.position += SetInvertedMovement(x, z);
-                        break;
-                    case ConfusionType.Flipped:
-                        transform.position += SetFlippedMovement(x, z);
-                        break;
-                    case ConfusionType.InvertedFlipped:
-                        transform.position += SetInvertedFlippedMovement(x, z);
-                        break;
-                    default:
-                        break;
+                    meshRenderer.transform.rotation = Quaternion.LookRotation(new Vector3(x, 0f, z));
+                }
+
+                sm.SetMovingBool(true);
+
+                if (IsConfused)
+                {
+                    switch (CurrentConfusionType)
+                    {
+                        case ConfusionType.Inverted:
+                            transform.position += SetInvertedMovement(x, z);
+                            break;
+                        case ConfusionType.Flipped:
+                            transform.position += SetFlippedMovement(x, z);
+                            break;
+                        case ConfusionType.InvertedFlipped:
+                            transform.position += SetInvertedFlippedMovement(x, z);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else
+                {
+                    transform.position += SetNormalMovement(x, z);
                 }
             }
             else
             {
-                transform.position += SetNormalMovement(x, z);
+                sm.SetMovingBool(false);
             }
         }
     }
@@ -147,7 +164,7 @@ public class PlayerController : MonoBehaviour
         currentMovementSpeed = StartingMovementSpeed;
     }
 
-    public PlayerController IdentifyPlayer (int playerNumber)
+    public PlayerController IdentifyPlayer(int playerNumber)
     {
         CurrentPlayerNumber = (PlayerNumber)Enum.GetValues(typeof(PlayerNumber)).GetValue(playerNumber);
         return this;
@@ -158,11 +175,13 @@ public class PlayerController : MonoBehaviour
     public void EnableFreezedPerk()
     {
         IsFreezed = true;
+        sm.SetFreezeBool(true);
     }
 
     public void DisableFreezedPerk()
     {
         IsFreezed = false;
+        sm.SetFreezeBool(false);
     }
 
     public void EnableConfusedPerk()
@@ -171,34 +190,40 @@ public class PlayerController : MonoBehaviour
         Array values = Enum.GetValues(typeof(ConfusionType));
         Random random = new Random();
         CurrentConfusionType = (ConfusionType)values.GetValue(random.Next(values.Length));
+        sm.SetConfusedBool(true);
     }
 
     public void DisableConfusedPerk()
     {
         IsConfused = false;
+        sm.SetConfusedBool(false);
     }
 
-    public void EnableSlowedPerk(float speedToSub)
+    public void EnableSlowedPerk(float speedToMultiply)
     {
         IsSlowed = true;
-        currentMovementSpeed -= speedToSub;
+        sm.ChangeAnimatorSpeed(speedToMultiply);
+        currentMovementSpeed *= speedToMultiply;
     }
 
     public void DisableSlowedPerk()
     {
         IsSlowed = false;
+        sm.ChangeAnimatorSpeed(1);
         ResetMovementSpeed();
     }
 
-    public void EnableFasterPerk(float speedToAdd)
+    public void EnableFasterPerk(float speedToMultiply)
     {
         IsFaster = true;
-        currentMovementSpeed += speedToAdd;
+        sm.ChangeAnimatorSpeed(speedToMultiply);
+        currentMovementSpeed *= speedToMultiply;
     }
 
     public void DisableFasterPerk()
     {
         IsFaster = false;
+        sm.ChangeAnimatorSpeed(1);
         ResetMovementSpeed();
     }
 
@@ -206,6 +231,8 @@ public class PlayerController : MonoBehaviour
     {
         DisableFreezedPerk();
         DisableConfusedPerk();
+        DisableSlowedPerk();
+        DisableFasterPerk();
     }
 
     public void RemovePersonalPerk()
@@ -223,13 +250,17 @@ public class PlayerController : MonoBehaviour
             CurrentPerk = pickedPerk;
             pickedPerk.ReturnToPool();
         }
-        else if(other.GetComponent<Door>() != null) {
+        else if (other.GetComponent<Door>() != null)
+        {
             other.GetComponent<Door>().lightUp();
         }
     }
 
-    private void OnTriggerStay(Collider other) {
-        if(Input.GetButtonDown("Door") && other.GetComponent<Door>() != null) {
+    private void OnTriggerStay(Collider other)
+    {
+        if (Input.GetButtonDown("Door") && other.GetComponent<Door>() != null)
+        {
+            sm.SetDoorTrigger();
             other.GetComponent<Door>().openClose();
         }
     }
