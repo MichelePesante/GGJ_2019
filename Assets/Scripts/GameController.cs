@@ -5,11 +5,18 @@ using System.Linq;
 
 public class GameController : MonoBehaviour {
 
+    public PlayerController PlayerPrefab;
+
+    public int PlayerToSpawn;
+
 	public List<PlayerController> players = new List<PlayerController>();
 
     private void Awake()
     {
-        players = FindObjectsOfType<PlayerController>().ToList();
+        for (int i = 0; i < PlayerToSpawn; i++)
+        {
+            players.Add(Instantiate(PlayerPrefab, Vector3.right, Quaternion.identity).IdentifyPlayer(i));
+        }
     }
 
     public void TriggerFreezedPerk (PlayerController perkOwner, float perkDuration)
