@@ -19,11 +19,11 @@ public class SelectPlayerManager : MonoBehaviour {
 	void Update () {
 		for(var i = 0; i < 4; i++) {
 			if(Input.GetButtonDown(actionButtonNames[i]) && !players[i]) {
-				texts[i].text = "Player 1";
+				texts[i].text = "Player " + (i + 1);
 				players[i] = true;
 			}
 			else if(Input.GetButtonDown(actionButtonNames[i]) && players[i]) {
-				texts[1].text = "Press to join";
+				texts[i].text = "Press to join";
 				players[i] = false;
 			}
 		}
@@ -34,6 +34,8 @@ public class SelectPlayerManager : MonoBehaviour {
 	}
 
 	public void startGame() {
+		print("Start game");
+
 		int activePlayers = 0;
 		foreach(bool player in players) {
 			if(player)
@@ -42,9 +44,9 @@ public class SelectPlayerManager : MonoBehaviour {
 
 		if(activePlayers >= 2) {
 			PlayerPrefs.SetInt("player1", (players[0]) ? 1 : 0);
-			PlayerPrefs.SetInt("player2", (players[0]) ? 1 : 0);
-			PlayerPrefs.SetInt("player3", (players[0]) ? 1 : 0);
-			PlayerPrefs.SetInt("player4", (players[0]) ? 1 : 0);
+			PlayerPrefs.SetInt("player2", (players[1]) ? 1 : 0);
+			PlayerPrefs.SetInt("player3", (players[2]) ? 1 : 0);
+			PlayerPrefs.SetInt("player4", (players[3]) ? 1 : 0);
 
 			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 		}
