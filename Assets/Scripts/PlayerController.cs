@@ -283,6 +283,7 @@ public class PlayerController : MonoBehaviour
 
     public void RemovePersonalPerk()
     {
+        Destroy(CurrentPerk.gameObject);
         CurrentPerk = null;
         myPerkImage.SetNonePerkImage();
     }
@@ -296,6 +297,7 @@ public class PlayerController : MonoBehaviour
             Perk pickedPerk = other.GetComponent<Perk>();
             CurrentPerk = pickedPerk;
             pickedPerk.SetImage(myPerkImage);
+            other.transform.SetParent(null);
             pickedPerk.ReturnToPool();
         }
         else if (other.GetComponent<Door>() != null)

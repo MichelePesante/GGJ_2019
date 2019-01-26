@@ -59,6 +59,7 @@ GameObject:
   - component: {fileID: 95720914390993174}
   - component: {fileID: 114869634787064404}
   - component: {fileID: 114238937010865472}
+  - component: {fileID: 65395812485859392}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -86,7 +87,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1761265086923228}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -27.1, y: 0.8, z: 61.5}
+  m_LocalPosition: {x: -50.591724, y: 28.985626, z: -5.222862}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4778610964853482}
@@ -205,7 +206,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!65 &65191561690755700
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -218,6 +219,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &65395812485859392
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1761265086923228}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 0.34938574}
+  m_Center: {x: 0, y: 0, z: 0.6158745}
 --- !u!65 &65430428741079646
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -261,8 +274,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentPlayerNumber: 0
   StartingMovementSpeed: 10
+  myPerkImage: {fileID: 0}
   CurrentPerk: {fileID: 0}
-  oldTriggerHeld: 0
   CurrentConfusionType: 0
   IsFreezed: 0
   IsConfused: 0

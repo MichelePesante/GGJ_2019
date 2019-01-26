@@ -19,10 +19,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4059593340070842}
+  - component: {fileID: 114567291117059122}
   m_Layer: 0
   m_Name: PerkSpawnPoint
-  m_TagString: PerkSpawnPoint
-  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -32,10 +33,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1778218063683128}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -5.54}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -42.76, y: 10.5, z: 25.39}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114567291117059122
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1778218063683128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd2f63145f1304fbaab3cecb00d03fa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perksPrefab:
+  - {fileID: 1738699136479674, guid: bab8f226ae958274c87e6e0690f8150b, type: 2}
+  - {fileID: 1948241661691636, guid: 3dd00a566dd4a944395324e83d9fda77, type: 2}
+  - {fileID: 1317264780556818, guid: 744f63da9fcced946b5e70786123a468, type: 2}
+  - {fileID: 1353611948784934, guid: 34eb71e94847fc3428d2d1b8c4e36b35, type: 2}
+  - {fileID: 1400362122027778, guid: c621223cd0012a14bac296500acad843, type: 2}
+  respawnTime: 3

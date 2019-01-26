@@ -1,32 +1,41 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = System.Random;
 
-public class PerkSpawnPoint : MonoBehaviour {
-	public Timer timer = new Timer();
+public class PerkSpawnPoint : MonoBehaviour
+{
+    public Timer timer = new Timer();
 
-	public List<GameObject> perksPrefab = new List<GameObject>();
+    public List<GameObject> perksPrefab = new List<GameObject>();
 
-	public float respawnTime;
+    public float respawnTime;
 
-	private void Update() {
-		if(GetComponentInChildren<Perk>() == null) {
-			timer.TickTimer();
+    private void Start()
+    {
+        spawnNewPerk();
+    }
 
-			if(timer.CheckTimer(respawnTime)) {
-				spawnNewPerk();
-			}
-		}
-	}
+    private void Update()
+    {
+        if (GetComponentInChildren<Perk>() == null)
+        {
+            timer.TickTimer();
 
-	private void spawnNewPerk() {
-		resetTimer();
-		Random rnd = new Random();
-		Instantiate(perksPrefab[rnd.Next(0, perksPrefab.Count)], transform.position, Quaternion.identity).transform.SetParent(gameObject.transform);
-	}
+            if (timer.CheckTimer(respawnTime))
+            {
+                spawnNewPerk();
+            }
+        }
+    }
 
-	public void resetTimer() {
-		timer.StopTimer();
-	}
+    private void spawnNewPerk()
+    {
+        resetTimer();
+        Instantiate(perksPrefab[Random.Range(0, perksPrefab.Count)], transform.position, Quaternion.identity).transform.SetParent(gameObject.transform);
+    }
+
+    public void resetTimer()
+    {
+        timer.StopTimer();
+    }
 }
