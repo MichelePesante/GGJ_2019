@@ -14,6 +14,9 @@ public class Door : MonoBehaviour {
 	public bool closed = true;
 	public bool locked = false;
 
+	public Material green;
+	public Material lightGreen;
+
 	private void Awake() {
 		switch(gameObject.tag) {
 			case "Group1":
@@ -27,13 +30,24 @@ public class Door : MonoBehaviour {
 		}
 	}
 
-	public void open() {
-		if(!locked && closed)
+	public void openClose() {
+		print("OpenClose");
+
+		if(!locked) {
+			if (closed) {
+				open();
+			}
+			else {
+				close();
+			}
+		}
+	}
+
+	private void open() {
 			closed = false;
 	}
 
-	public void close() {
-		if(!locked && !closed)
+	private void close() {
 			closed = true;
 	}
 
@@ -43,5 +57,13 @@ public class Door : MonoBehaviour {
 
 	public void unlock() {
 		locked = false;
+	}
+
+	public void lightUp() {
+		GetComponentInChildren<MeshRenderer>().material = lightGreen;
+	}
+
+	private void OnTriggerExit(Collider other) {
+		GetComponentInChildren<MeshRenderer>().material = green;
 	}
 }

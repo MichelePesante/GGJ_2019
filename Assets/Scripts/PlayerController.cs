@@ -214,6 +214,15 @@ public class PlayerController : MonoBehaviour
             CurrentPerk = pickedPerk;
             pickedPerk.ReturnToPool();
         }
+        else if(other.GetComponent<Door>() != null) {
+            other.GetComponent<Door>().lightUp();
+        }
+    }
+
+    private void OnTriggerStay(Collider other) {
+        if(Input.GetButtonDown("Door") && other.GetComponent<Door>() != null) {
+            other.GetComponent<Door>().openClose();
+        }
     }
 }
 
