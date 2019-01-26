@@ -8,8 +8,9 @@ public class ThroneManager : MonoBehaviour {
 	public Timer timer = new Timer();
 
 	private LineRenderer timerLine;
-	private Vector3 timerLineStartPosition = new Vector3(-1, 1, 0);
-	private Vector3 timerLineEndPosition = new Vector3(-1, 1, 0);
+    public Vector3 timerLineStartPosition;
+    private Vector3 timerLineEndPosition;
+    public float maxWidthTimerLine;
 
 	public float duration;
 
@@ -19,6 +20,8 @@ public class ThroneManager : MonoBehaviour {
 		thrones = FindObjectsOfType<Throne>().ToList();
 
 		timerLine = GetComponentInChildren<LineRenderer>();
+
+        timerLineEndPosition = timerLineStartPosition;
 	}
 
 	private void Start() {
@@ -32,7 +35,7 @@ public class ThroneManager : MonoBehaviour {
 	private void Update() {
 		timer.TickTimer();
 
-		timerLineEndPosition.x += 2 / duration * Time.deltaTime;
+		timerLineEndPosition.x += maxWidthTimerLine / duration * Time.deltaTime;
 		setTimerLinePositions();
 
 		if(timer.CheckTimer(duration)) {

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,12 +11,15 @@ public class GameController : MonoBehaviour
     public int PlayerToSpawn;
 
     public List<PlayerController> players = new List<PlayerController>();
+    public List<GameObject> playerSpawnPoints = new List<GameObject>();
 
     private void Awake()
     {
+        playerSpawnPoints = GameObject.FindGameObjectsWithTag("PlayerSpawnPoint").ToList();
+
         for (int i = 0; i < PlayerToSpawn; i++)
         {
-            players.Add(Instantiate(PlayerPrefab, Vector3.right * i * 2, Quaternion.identity).IdentifyPlayer(i));
+            players.Add(Instantiate(PlayerPrefab, playerSpawnPoints[i].transform.position, Quaternion.identity).IdentifyPlayer(i));
         }
     }
 
