@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
             EnableFasterPerk(1);
         }
 
-        if (Input.GetButtonDown("Perk"))
+        if (Input.GetButtonDown("Perk") && CurrentPerk != null)
         {
             CurrentPerk.TriggerPerk(this);
             RemovePersonalPerk();
