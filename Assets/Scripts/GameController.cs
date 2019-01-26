@@ -74,11 +74,11 @@ public class GameController : MonoBehaviour
 
     public void TriggerFasterPerk(PlayerController perkOwner, float speedAmount, float perkDuration)
     {
-        Timer timer = new Timer();
-
-        perkOwner.EnableFasterPerk(speedAmount);
-
-        StartCoroutine(CheckFasterPerk(perkOwner, timer, perkDuration));
+        if (!perkOwner.IsFaster)
+        {
+            perkOwner.EnableFasterPerk(speedAmount);
+            StartCoroutine(CheckFasterPerk(perkOwner, perkDuration));
+        }
     }
 
     private IEnumerator CheckFreezedPerk(PlayerController perkOwner, Timer timerToCheck, float perkDuration)
@@ -96,6 +96,7 @@ public class GameController : MonoBehaviour
                 if (player != perkOwner)
                 {
                     player.DisableFreezedPerk();
+                    timerToCheck.StopTimer();
                 }
             }
         }
@@ -116,6 +117,7 @@ public class GameController : MonoBehaviour
                 if (player != perkOwner)
                 {
                     player.DisableConfusedPerk();
+                    timerToCheck.StopTimer();
                 }
             }
         }
@@ -136,22 +138,25 @@ public class GameController : MonoBehaviour
                 if (player != perkOwner)
                 {
                     player.DisableSlowedPerk();
+                    timerToCheck.StopTimer();
                 }
             }
         }
     }
 
-    private IEnumerator CheckFasterPerk(PlayerController perkOwner, Timer timerToCheck, float perkDuration)
+    private IEnumerator CheckFasterPerk(PlayerController perkOwner, float perkDuration)
     {
-        while (!timerToCheck.CheckTimer(perkDuration))
+        while (!perkOwner.fasterTimer.CheckTimer(perkDuration))
         {
-            timerToCheck.TickTimer();
+            Debug.Log("Timer tick: " + perkOwner.fasterTimer.GetTimer());
+            perkOwner.fasterTimer.TickTimer();
             yield return null;
         }
 
-        if (timerToCheck.CheckTimer(perkDuration))
+        if (perkOwner.fasterTimer.CheckTimer(perkDuration))
         {
             perkOwner.DisableFasterPerk();
+            perkOwner.fasterTimer.StopTimer();
         }
     }
 

@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
 
     public float StartingMovementSpeed;
 
+    public Timer fasterTimer = new Timer();
+
     public Perk CurrentPerk;
 
     private float currentMovementSpeed;
