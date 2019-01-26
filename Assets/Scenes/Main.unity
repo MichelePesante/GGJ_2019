@@ -2334,6 +2334,26 @@ Prefab:
       propertyPath: m_SpotAngle
       value: 37
       objectReference: {fileID: 0}
+    - target: {fileID: 65891184139771498, guid: 0ee1506e66e0d42aea13663896a56219,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 3.4704208
+      objectReference: {fileID: 0}
+    - target: {fileID: 65891184139771498, guid: 0ee1506e66e0d42aea13663896a56219,
+        type: 2}
+      propertyPath: m_Center.x
+      value: 0.24954987
+      objectReference: {fileID: 0}
+    - target: {fileID: 65891184139771498, guid: 0ee1506e66e0d42aea13663896a56219,
+        type: 2}
+      propertyPath: m_Size.z
+      value: 3.413209
+      objectReference: {fileID: 0}
+    - target: {fileID: 65891184139771498, guid: 0ee1506e66e0d42aea13663896a56219,
+        type: 2}
+      propertyPath: m_Center.z
+      value: 0.4077525
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ee1506e66e0d42aea13663896a56219, type: 2}
   m_IsPrefabAsset: 0
@@ -3200,6 +3220,26 @@ Prefab:
     - target: {fileID: 1600553587794706, guid: 0ee1506e66e0d42aea13663896a56219, type: 2}
       propertyPath: m_Name
       value: Throne (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 65891184139771498, guid: 0ee1506e66e0d42aea13663896a56219,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 2.786807
+      objectReference: {fileID: 0}
+    - target: {fileID: 65891184139771498, guid: 0ee1506e66e0d42aea13663896a56219,
+        type: 2}
+      propertyPath: m_Center.x
+      value: -0.28200674
+      objectReference: {fileID: 0}
+    - target: {fileID: 65891184139771498, guid: 0ee1506e66e0d42aea13663896a56219,
+        type: 2}
+      propertyPath: m_Size.z
+      value: 3.4573603
+      objectReference: {fileID: 0}
+    - target: {fileID: 65891184139771498, guid: 0ee1506e66e0d42aea13663896a56219,
+        type: 2}
+      propertyPath: m_Center.z
+      value: 0.42982817
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ee1506e66e0d42aea13663896a56219, type: 2}
@@ -4648,6 +4688,26 @@ Prefab:
     - target: {fileID: 1600553587794706, guid: 0ee1506e66e0d42aea13663896a56219, type: 2}
       propertyPath: m_Name
       value: Throne (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 65891184139771498, guid: 0ee1506e66e0d42aea13663896a56219,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 3.157939
+      objectReference: {fileID: 0}
+    - target: {fileID: 65891184139771498, guid: 0ee1506e66e0d42aea13663896a56219,
+        type: 2}
+      propertyPath: m_Center.x
+      value: -0.09644079
+      objectReference: {fileID: 0}
+    - target: {fileID: 65891184139771498, guid: 0ee1506e66e0d42aea13663896a56219,
+        type: 2}
+      propertyPath: m_Size.z
+      value: 3.3683405
+      objectReference: {fileID: 0}
+    - target: {fileID: 65891184139771498, guid: 0ee1506e66e0d42aea13663896a56219,
+        type: 2}
+      propertyPath: m_Center.z
+      value: 0.38531828
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ee1506e66e0d42aea13663896a56219, type: 2}
@@ -8916,6 +8976,26 @@ Prefab:
     - target: {fileID: 1600553587794706, guid: 0ee1506e66e0d42aea13663896a56219, type: 2}
       propertyPath: m_Name
       value: Throne (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 65891184139771498, guid: 0ee1506e66e0d42aea13663896a56219,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 3.700943
+      objectReference: {fileID: 0}
+    - target: {fileID: 65891184139771498, guid: 0ee1506e66e0d42aea13663896a56219,
+        type: 2}
+      propertyPath: m_Center.x
+      value: -0.4405365
+      objectReference: {fileID: 0}
+    - target: {fileID: 65891184139771498, guid: 0ee1506e66e0d42aea13663896a56219,
+        type: 2}
+      propertyPath: m_Size.z
+      value: 2.897812
+      objectReference: {fileID: 0}
+    - target: {fileID: 65891184139771498, guid: 0ee1506e66e0d42aea13663896a56219,
+        type: 2}
+      propertyPath: m_Center.z
+      value: -0.046714783
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ee1506e66e0d42aea13663896a56219, type: 2}
@@ -15021,6 +15101,16 @@ Prefab:
       propertyPath: m_Name
       value: Throne (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 65891184139771498, guid: 0ee1506e66e0d42aea13663896a56219,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 3.7129898
+      objectReference: {fileID: 0}
+    - target: {fileID: 65891184139771498, guid: 0ee1506e66e0d42aea13663896a56219,
+        type: 2}
+      propertyPath: m_Center.x
+      value: -0.38014603
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ee1506e66e0d42aea13663896a56219, type: 2}
   m_IsPrefabAsset: 0
@@ -15707,6 +15797,26 @@ Prefab:
       propertyPath: m_Name
       value: Throne (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 65891184139771498, guid: 0ee1506e66e0d42aea13663896a56219,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 3.1443624
+      objectReference: {fileID: 0}
+    - target: {fileID: 65891184139771498, guid: 0ee1506e66e0d42aea13663896a56219,
+        type: 2}
+      propertyPath: m_Center.x
+      value: -0.103229046
+      objectReference: {fileID: 0}
+    - target: {fileID: 65891184139771498, guid: 0ee1506e66e0d42aea13663896a56219,
+        type: 2}
+      propertyPath: m_Size.z
+      value: 2.8926735
+      objectReference: {fileID: 0}
+    - target: {fileID: 65891184139771498, guid: 0ee1506e66e0d42aea13663896a56219,
+        type: 2}
+      propertyPath: m_Center.z
+      value: 0.010240555
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ee1506e66e0d42aea13663896a56219, type: 2}
   m_IsPrefabAsset: 0
@@ -16165,6 +16275,26 @@ Prefab:
     - target: {fileID: 1600553587794706, guid: 0ee1506e66e0d42aea13663896a56219, type: 2}
       propertyPath: m_Name
       value: Throne (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 65891184139771498, guid: 0ee1506e66e0d42aea13663896a56219,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 3.3083181
+      objectReference: {fileID: 0}
+    - target: {fileID: 65891184139771498, guid: 0ee1506e66e0d42aea13663896a56219,
+        type: 2}
+      propertyPath: m_Center.x
+      value: -0.021251202
+      objectReference: {fileID: 0}
+    - target: {fileID: 65891184139771498, guid: 0ee1506e66e0d42aea13663896a56219,
+        type: 2}
+      propertyPath: m_Size.z
+      value: 3.4565363
+      objectReference: {fileID: 0}
+    - target: {fileID: 65891184139771498, guid: 0ee1506e66e0d42aea13663896a56219,
+        type: 2}
+      propertyPath: m_Center.z
+      value: 0.42941618
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ee1506e66e0d42aea13663896a56219, type: 2}
