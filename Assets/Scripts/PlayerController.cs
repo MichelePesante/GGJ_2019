@@ -300,10 +300,6 @@ public class PlayerController : MonoBehaviour
             other.transform.SetParent(null);
             pickedPerk.ReturnToPool();
         }
-        else if (other.GetComponent<Door>() != null)
-        {
-            other.GetComponent<Door>().lightUp();
-        }
 
         if (other.GetComponent<Throne>() != null && other.GetComponent<Throne>().isActive)
         {

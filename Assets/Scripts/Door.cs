@@ -16,9 +16,6 @@ public class Door : MonoBehaviour
     public bool closed = true;
     public bool locked = false;
 
-    public Material green;
-    public Material lightGreen;
-
     private void Awake()
     {
         myAnim = GetComponent<Animator>();
@@ -38,6 +35,7 @@ public class Door : MonoBehaviour
 
     public void openClose()
     {
+        print("OpenClose");
         if (!locked)
         {
             if (closed)
@@ -71,15 +69,5 @@ public class Door : MonoBehaviour
     public void unlock()
     {
         locked = false;
-    }
-
-    public void lightUp()
-    {
-        GetComponentInChildren<MeshRenderer>().material = lightGreen;
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        GetComponentInChildren<MeshRenderer>().material = green;
     }
 }
