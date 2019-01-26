@@ -10,11 +10,20 @@ public class PlayerController : MonoBehaviour
 
     public float StartingMovementSpeed;
 
+    public Timer fasterTimer = new Timer();
+
     public Perk CurrentPerk;
 
     private float currentMovementSpeed;
 
+    [SerializeField]
+    private bool oldTriggerHeld;
+
     public ConfusionType CurrentConfusionType;
+
+    private string DoorButton;
+    private string HorizontalAxis;
+    private string VerticalAxis;
 
     private MeshRenderer meshRenderer;
     private PlayerStateMachine sm;
@@ -34,25 +43,36 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         ResetMovementSpeed();
-    }
-
-    void Update()
-    {
         switch (CurrentPlayerNumber)
         {
             case PlayerNumber.Number_1:
-                MovePlayer("Horizontal_Player1", "Vertical_Player1");
+                HorizontalAxis = "Horizontal_Player1";
+                VerticalAxis = "Vertical_Player1";
+                DoorButton = "Door_1";
                 break;
             case PlayerNumber.Number_2:
-                MovePlayer("Horizontal_Player2", "Vertical_Player2");
+                HorizontalAxis = "Horizontal_Player2";
+                VerticalAxis = "Vertical_Player2";
+                DoorButton = "Door_2";
                 break;
             case PlayerNumber.Number_3:
+                HorizontalAxis = "Horizontal_Player3";
+                VerticalAxis = "Vertical_Player3";
+                DoorButton = "Door_3";
                 break;
             case PlayerNumber.Number_4:
+                HorizontalAxis = "Horizontal_Player4";
+                VerticalAxis = "Vertical_Player4";
+                DoorButton = "Door_4";
                 break;
             default:
                 break;
         }
+    }
+
+    void Update()
+    {
+        MovePlayer(HorizontalAxis, VerticalAxis);
 
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -75,6 +95,11 @@ public class PlayerController : MonoBehaviour
         }
 
         UsePerk();
+
+        if(Input.GetAxisRaw(DoorButton) <= 0)
+        {
+            oldTriggerHeld = false;
+        }
     }
 
     public void MovePlayer(string horizontalAxisName, string verticalAxisName)
@@ -93,11 +118,6 @@ public class PlayerController : MonoBehaviour
         {
             if (!IsFreezed)
             {
-                if (new Vector3(x, 0f, z) != Vector3.zero)
-                {
-                    meshRenderer.transform.rotation = Quaternion.LookRotation(new Vector3(x, 0f, z));
-                }
-
                 sm.SetMovingBool(true);
 
                 if (IsConfused)
@@ -105,13 +125,16 @@ public class PlayerController : MonoBehaviour
                     switch (CurrentConfusionType)
                     {
                         case ConfusionType.Inverted:
-                            transform.position += SetInvertedMovement(x, z);
+                            transform.Translate(SetInvertedMovement(x, z));
+                            RotatePlayer(-x, -z);
                             break;
                         case ConfusionType.Flipped:
-                            transform.position += SetFlippedMovement(x, z);
+                            transform.Translate(SetFlippedMovement(x, z));
+                            RotatePlayer(z, x);
                             break;
                         case ConfusionType.InvertedFlipped:
-                            transform.position += SetInvertedFlippedMovement(x, z);
+                            transform.Translate(SetInvertedFlippedMovement(x, z));
+                            RotatePlayer(-z, -x);
                             break;
                         default:
                             break;
@@ -119,7 +142,8 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
-                    transform.position += SetNormalMovement(x, z);
+                    transform.Translate(SetNormalMovement(x, z));
+                    RotatePlayer(x, z);
                 }
             }
             else
@@ -162,6 +186,14 @@ public class PlayerController : MonoBehaviour
     public void ResetMovementSpeed()
     {
         currentMovementSpeed = StartingMovementSpeed;
+    }
+
+    public void RotatePlayer(float x, float z)
+    {
+        if (new Vector3(x, 0f, z) != Vector3.zero)
+        {
+            meshRenderer.transform.rotation = Quaternion.LookRotation(new Vector3(x, 0f, z));
+        }
     }
 
     public PlayerController IdentifyPlayer(int playerNumber)
@@ -256,12 +288,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void OpenDoor(Collider other)
+    {
+        sm.SetDoorTrigger();
+        other.GetComponent<Door>().openClose();
+    }
+
     private void OnTriggerStay(Collider other)
     {
-        if (Input.GetButtonDown("Door") && other.GetComponent<Door>() != null)
+        if (other.GetComponent<Door>() != null && Input.GetAxisRaw(DoorButton) >= 0.9f && !oldTriggerHeld)
         {
-            sm.SetDoorTrigger();
-            other.GetComponent<Door>().openClose();
+            oldTriggerHeld = true;
+            OpenDoor(other);
         }
     }
 }
