@@ -16,6 +16,7 @@ public abstract class Perk : MonoBehaviour
     }
 
     abstract public void TriggerPerk(PlayerController perkOwner);
+    abstract public void SetImage(PerkImage imageToChange);
 
     public void ReturnToPool()
     {

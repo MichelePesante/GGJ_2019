@@ -54,7 +54,6 @@ GameObject:
   - component: {fileID: 4282718577091922}
   - component: {fileID: 33379035585663304}
   - component: {fileID: 23273179284435270}
-  - component: {fileID: 65274443106485498}
   m_Layer: 0
   m_Name: Throne_Graphic
   m_TagString: Untagged
@@ -69,7 +68,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1600553587794706}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 37.27947, y: 14.564253, z: -22.563879}
+  m_LocalPosition: {x: -32.280533, y: 14.564253, z: 2.5761223}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4282718577091922}
@@ -145,18 +144,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1704861803528488}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &65274443106485498
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1704861803528488}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65891184139771498
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -167,8 +154,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.6870165, y: 2.3282757, z: 2.7554293}
-  m_Center: {x: 0.16809797, y: 0.66413784, z: 0.07886267}
+  m_Size: {x: 3.700943, y: 2.3282757, z: 2.897812}
+  m_Center: {x: -0.4405365, y: 0.66413784, z: -0.046714783}
 --- !u!108 &108066867480544990
 Light:
   m_ObjectHideFlags: 1

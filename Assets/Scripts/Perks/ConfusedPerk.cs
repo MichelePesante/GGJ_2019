@@ -8,4 +8,9 @@ public class ConfusedPerk : Perk
     {
         gameController.TriggerConfusedPerk(perkOwner, duration);
     }
+
+    public override void SetImage(PerkImage imageToChange)
+    {
+        imageToChange.SetConfusePerkImage();
+    }
 }

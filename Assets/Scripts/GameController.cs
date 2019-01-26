@@ -12,22 +12,20 @@ public class GameController : MonoBehaviour
 
     public List<PlayerController> players = new List<PlayerController>();
     public List<GameObject> playerSpawnPoints = new List<GameObject>();
+    public List<PerkImage> perkImages = new List<PerkImage>();
 
     private void Awake()
     {
-        playerSpawnPoints = GameObject.FindGameObjectsWithTag("PlayerSpawnPoint").ToList();
-        
-        List<string> playersPrefsName = new List<string>{"player1", "player2", "player3", "player4"};
+        List<string> playersPrefsName = new List<string> { "player1", "player2", "player3", "player4" };
 
-        for (var i = 0; i < 4; i++) {
-            if(PlayerPrefs.GetInt(playersPrefsName[i]) == 1)
+        for (var i = 0; i < 4; i++)
+        {
+            if (PlayerPrefs.GetInt(playersPrefsName[i]) == 1)
+            {
                 players.Add(Instantiate(PlayerPrefab, playerSpawnPoints[i].transform.position, Quaternion.identity).IdentifyPlayer(i));
+                players[i].myPerkImage = perkImages[i];
+            }
         }
-
-        //for (int i = 0; i < PlayerToSpawn; i++)
-        //{
-        //    players.Add(Instantiate(PlayerPrefab, playerSpawnPoints[i].transform.position, Quaternion.identity).IdentifyPlayer(i));
-        //}
     }
 
     private void Update()
@@ -159,7 +157,6 @@ public class GameController : MonoBehaviour
     {
         while (!perkOwner.fasterTimer.CheckTimer(perkDuration))
         {
-            Debug.Log("Timer tick: " + perkOwner.fasterTimer.GetTimer());
             perkOwner.fasterTimer.TickTimer();
             yield return null;
         }

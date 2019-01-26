@@ -10,4 +10,9 @@ public class FasterPerk : Perk
     {
         gameController.TriggerFasterPerk(perkOwner, perkMultiplier, duration);
     }
+
+    public override void SetImage(PerkImage imageToChange)
+    {
+        imageToChange.SetFastPerkImage();
+    }
 }

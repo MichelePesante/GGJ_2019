@@ -8,4 +8,9 @@ public class ThronePerk : Perk
     {
         FindObjectOfType<ThroneManager>().ActiveRandomThrone();
     }
+
+    public override void SetImage(PerkImage imageToChange)
+    {
+        imageToChange.SetThronePerkImage();
+    }
 }

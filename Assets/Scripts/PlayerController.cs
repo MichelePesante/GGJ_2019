@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
 
     public float StartingMovementSpeed;
 
+    public PerkImage myPerkImage;
+
     public Timer fasterTimer = new Timer();
 
     public Perk CurrentPerk;
@@ -25,6 +27,7 @@ public class PlayerController : MonoBehaviour
     private string DoorButton;
     private string HorizontalAxis;
     private string VerticalAxis;
+    private string PerkButton;
 
     private MeshRenderer meshRenderer;
     private PlayerStateMachine sm;
@@ -51,21 +54,25 @@ public class PlayerController : MonoBehaviour
                 HorizontalAxis = "Horizontal_Player1";
                 VerticalAxis = "Vertical_Player1";
                 DoorButton = "Door_1";
+                PerkButton = "Perk_1";
                 break;
             case PlayerNumber.Number_2:
                 HorizontalAxis = "Horizontal_Player2";
                 VerticalAxis = "Vertical_Player2";
                 DoorButton = "Door_2";
+                PerkButton = "Perk_2";
                 break;
             case PlayerNumber.Number_3:
                 HorizontalAxis = "Horizontal_Player3";
                 VerticalAxis = "Vertical_Player3";
                 DoorButton = "Door_3";
+                PerkButton = "Perk_3";
                 break;
             case PlayerNumber.Number_4:
                 HorizontalAxis = "Horizontal_Player4";
                 VerticalAxis = "Vertical_Player4";
                 DoorButton = "Door_4";
+                PerkButton = "Perk_4";
                 break;
             default:
                 break;
@@ -157,8 +164,7 @@ public class PlayerController : MonoBehaviour
 
     public void UsePerk()
     {
-        if ((Input.GetButtonDown("Perk_1") && CurrentPerk != null && CurrentPlayerNumber == PlayerNumber.Number_1) ||
-            (Input.GetButtonDown("Perk_2") && CurrentPerk != null && CurrentPlayerNumber == PlayerNumber.Number_2))
+        if (Input.GetButtonDown(PerkButton) && CurrentPerk != null)
         {
             CurrentPerk.TriggerPerk(this);
             RemovePersonalPerk();
@@ -278,6 +284,7 @@ public class PlayerController : MonoBehaviour
     public void RemovePersonalPerk()
     {
         CurrentPerk = null;
+        myPerkImage.SetNonePerkImage();
     }
 
     #endregion
@@ -288,6 +295,7 @@ public class PlayerController : MonoBehaviour
         {
             Perk pickedPerk = other.GetComponent<Perk>();
             CurrentPerk = pickedPerk;
+            pickedPerk.SetImage(myPerkImage);
             pickedPerk.ReturnToPool();
         }
         else if (other.GetComponent<Door>() != null)

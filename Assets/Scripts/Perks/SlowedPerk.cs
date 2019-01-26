@@ -10,4 +10,9 @@ public class SlowedPerk : Perk
     {
         gameController.TriggerSlowedPerk(perkOwner, perkMultiplier, duration);
     }
+
+    public override void SetImage(PerkImage imageToChange)
+    {
+        imageToChange.SetSlowPerkImage();
+    }
 }

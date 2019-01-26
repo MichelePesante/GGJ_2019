@@ -8,4 +8,9 @@ public class FreezedPerk : Perk
     {
         gameController.TriggerFreezedPerk(perkOwner, duration);
     }
+
+    public override void SetImage(PerkImage imageToChange)
+    {
+        imageToChange.SetFreezePerkImage();
+    }
 }
