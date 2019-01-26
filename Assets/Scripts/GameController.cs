@@ -15,7 +15,7 @@ public class GameController : MonoBehaviour {
     {
         for (int i = 0; i < PlayerToSpawn; i++)
         {
-            players.Add(Instantiate(PlayerPrefab, Vector3.right, Quaternion.identity).IdentifyPlayer(i));
+            players.Add(Instantiate(PlayerPrefab, Vector3.right * i * 2, Quaternion.identity).IdentifyPlayer(i));
         }
     }
 
