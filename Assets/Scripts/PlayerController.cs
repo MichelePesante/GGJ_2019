@@ -16,11 +16,17 @@ public class PlayerController : MonoBehaviour
 
     public ConfusionType CurrentConfusionType;
 
+    private MeshRenderer meshRenderer;
+
     [Header("Perks Bool")]
     public bool IsFreezed;
     public bool IsConfused;
     public bool IsSlowed;
     public bool IsFaster;
+
+    private void Awake() {
+        meshRenderer = GetComponentInChildren<MeshRenderer>();
+    }
 
     void Start()
     {
@@ -29,7 +35,21 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        MovePlayer();
+        switch (CurrentPlayerNumber)
+        {
+            case PlayerNumber.Number_1:
+                MovePlayer("Horizontal_Player1", "Vertical_Player1");
+                break;
+            case PlayerNumber.Number_2:
+                MovePlayer("Horizontal_Player2", "Vertical_Player2");
+                break;
+            case PlayerNumber.Number_3:
+                break;
+            case PlayerNumber.Number_4:
+                break;
+            default:
+                break;
+        }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -54,28 +74,13 @@ public class PlayerController : MonoBehaviour
         UsePerk();
     }
 
-    public void MovePlayer()
+    public void MovePlayer(String horizontalAxisName, String verticalAxisName)
     {
         float x = 0f;
         float z = 0f;
 
-        switch (CurrentPlayerNumber)
-        {
-            case PlayerNumber.Number_1:
-                x = Input.GetAxisRaw("Horizontal_Player1");
-                z = Input.GetAxisRaw("Vertical_Player1");
-                break;
-            case PlayerNumber.Number_2:
-                x = Input.GetAxisRaw("Horizontal_Player2");
-                z = Input.GetAxisRaw("Vertical_Player2");
-                break;
-            case PlayerNumber.Number_3:
-                break;
-            case PlayerNumber.Number_4:
-                break;
-            default:
-                break;
-        }
+        x = Input.GetAxisRaw(horizontalAxisName);
+        z = Input.GetAxisRaw(verticalAxisName);
 
         if (!IsFreezed)
         {
