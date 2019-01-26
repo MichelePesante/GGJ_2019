@@ -1,15 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
+using UnityEngine.SceneManagement;
 
-public class GameController : MonoBehaviour {
-
+public class GameController : MonoBehaviour
+{
     public PlayerController PlayerPrefab;
 
     public int PlayerToSpawn;
 
-	public List<PlayerController> players = new List<PlayerController>();
+    public List<PlayerController> players = new List<PlayerController>();
 
     private void Awake()
     {
@@ -19,7 +19,15 @@ public class GameController : MonoBehaviour {
         }
     }
 
-    public void TriggerFreezedPerk (PlayerController perkOwner, float perkDuration)
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            GoToPreviousScene();
+        }
+    }
+
+    public void TriggerFreezedPerk(PlayerController perkOwner, float perkDuration)
     {
         Timer timer = new Timer();
 
@@ -34,7 +42,7 @@ public class GameController : MonoBehaviour {
         StartCoroutine(CheckFreezedPerk(perkOwner, timer, perkDuration));
     }
 
-    public void TriggerConfusedPerk (PlayerController perkOwner, float perkDuration)
+    public void TriggerConfusedPerk(PlayerController perkOwner, float perkDuration)
     {
         Timer timer = new Timer();
 
@@ -146,4 +154,18 @@ public class GameController : MonoBehaviour {
             perkOwner.DisableFasterPerk();
         }
     }
+
+    #region SceneManagement
+
+    public void GoToNextScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void GoToPreviousScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+    }
+
+    #endregion
 }

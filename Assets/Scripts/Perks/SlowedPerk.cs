@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class SlowedPerk : Perk
 {
-    public float perkValue;
+    public float perkMultiplier;
 
     public override void TriggerPerk(PlayerController perkOwner)
     {
-        gameController.TriggerSlowedPerk(perkOwner, perkValue, duration);
+        gameController.TriggerSlowedPerk(perkOwner, perkMultiplier, duration);
     }
 }
