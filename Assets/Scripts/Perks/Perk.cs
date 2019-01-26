@@ -2,20 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Perk : MonoBehaviour {
-	public float duration;
+public abstract class Perk : MonoBehaviour
+{
+    public float duration;
 
-	protected GameController gameController;
+    private Vector3 PoolPosition = new Vector3 (10000f, 10000f, 10000f);
 
-	private void Awake() {
-		gameController = FindObjectOfType<GameController>();
-	}
+    protected GameController gameController;
 
-	virtual public void TriggerPerk(PlayerController perkOwner) {
+    private void Awake()
+    {
+        gameController = FindObjectOfType<GameController>();
+    }
 
-	}
+    abstract public void TriggerPerk(PlayerController perkOwner);
 
-	virtual public void TriggerPerk(PlayerController perkOwner, float perkValue) {
-		
-	}
+    public void ReturnToPool()
+    {
+        transform.position = PoolPosition;
+    }
 }

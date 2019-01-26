@@ -26,7 +26,7 @@ public class Timer
 
     public bool CheckTimer(float timerToCheck)
     {
-        if(timer >= timerToCheck)
+        if (timer >= timerToCheck)
         {
             return true;
         }

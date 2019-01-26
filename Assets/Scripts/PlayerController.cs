@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     public float StartingMovementSpeed;
 
-    public Perk perk;
+    public Perk CurrentPerk;
 
     private float currentMovementSpeed;
 
@@ -47,6 +47,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T))
         {
             EnableFasterPerk(1);
+        }
+
+        if (Input.GetButtonDown("Perk"))
+        {
+            CurrentPerk.TriggerPerk(this);
+            RemovePersonalPerk();
         }
     }
 
@@ -161,7 +167,22 @@ public class PlayerController : MonoBehaviour
         DisableConfusedPerk();
     }
 
+    public void RemovePersonalPerk()
+    {
+        CurrentPerk = null;
+    }
+
     #endregion
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<Perk>() != null && CurrentPerk == null)
+        {
+            Perk pickedPerk = other.GetComponent<Perk>();
+            CurrentPerk = pickedPerk;
+            pickedPerk.ReturnToPool();
+        }
+    }
 }
 
 public enum ConfusionType

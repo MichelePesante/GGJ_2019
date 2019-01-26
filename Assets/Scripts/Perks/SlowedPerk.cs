@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlowedPerk : Perk {
-	public override void TriggerPerk (PlayerController perkOwner, float perkValue) {
-		gameController.TriggerSlowedPerk(perkOwner, perkValue);
-	}
+public class SlowedPerk : Perk
+{
+    public float perkValue;
+
+    public override void TriggerPerk(PlayerController perkOwner)
+    {
+        gameController.TriggerSlowedPerk(perkOwner, perkValue, duration);
+    }
 }
