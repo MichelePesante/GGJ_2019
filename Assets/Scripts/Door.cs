@@ -14,6 +14,19 @@ public class Door : MonoBehaviour {
 	public bool closed = true;
 	public bool locked = false;
 
+	private void Awake() {
+		switch(gameObject.tag) {
+			case "Group1":
+				this.group = DoorGroup.Group1;
+				break;
+			case "Group2":
+				this.group = DoorGroup.Group2;
+				break;
+			default:
+				break;
+		}
+	}
+
 	public void open() {
 		if(!locked && closed)
 			closed = false;
