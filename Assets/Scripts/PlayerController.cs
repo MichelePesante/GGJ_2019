@@ -82,6 +82,10 @@ public class PlayerController : MonoBehaviour
         x = Input.GetAxisRaw(horizontalAxisName);
         z = Input.GetAxisRaw(verticalAxisName);
 
+        if (new Vector3(x, 0f, z) != Vector3.zero) {
+            meshRenderer.transform.rotation = Quaternion.LookRotation(new Vector3(x, 0f, z));
+        }
+
         if (!IsFreezed)
         {
             if (IsConfused)
