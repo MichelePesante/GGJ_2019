@@ -7,25 +7,46 @@ using UnityEngine.UI;
 public class StartController : MonoBehaviour {
 
     public int menuSelection;
-    public bool oldTriggerHeld;
+    public bool oldRightTriggerHeld;
+    public bool OldLeftTriggerHeld;
     public Image PanelImage;
     public bool inCreditsPanel;
+    public List<Light> lights;
 
     void Update ()
     {
         if (Input.GetAxisRaw("Horizontal_Player1") <= 0)
         {
-            oldTriggerHeld = false;
+            oldRightTriggerHeld = false;
         }
 
-        if (Input.GetAxisRaw("Horizontal_Player1") >= 0.9f && !oldTriggerHeld && !inCreditsPanel)
+        if (Input.GetAxisRaw("Horizontal_Player1") >= 0)
         {
-            oldTriggerHeld = true;
+            OldLeftTriggerHeld = false;
+        }
+
+        if (Input.GetAxisRaw("Horizontal_Player1") >= 0.9f && !oldRightTriggerHeld && !inCreditsPanel)
+        {
+            oldRightTriggerHeld = true;
             menuSelection++;
             if (menuSelection > 2)
             {
                 menuSelection = 0;
             }
+            ResetAllLights();
+            lights[menuSelection].enabled = true;
+        }
+
+        if (Input.GetAxisRaw("Horizontal_Player1") <= -0.9f && !OldLeftTriggerHeld && !inCreditsPanel)
+        {
+            OldLeftTriggerHeld = true;
+            menuSelection--;
+            if (menuSelection < 0)
+            {
+                menuSelection = 2;
+            }
+            ResetAllLights();
+            lights[menuSelection].enabled = true;
         }
 
         if (Input.GetButtonDown("Start"))
@@ -58,6 +79,14 @@ public class StartController : MonoBehaviour {
                 break;
             default:
                 break;
+        }
+    }
+
+    public void ResetAllLights()
+    {
+        foreach (Light light in lights)
+        {
+            light.enabled = false;
         }
     }
 }
