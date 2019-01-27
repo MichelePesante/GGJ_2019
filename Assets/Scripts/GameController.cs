@@ -289,16 +289,15 @@ public class GameController : MonoBehaviour
                 xplayer.transform.position = new Vector3(0f, -20f, 0f);
             }
         }
-        player.transform.position = new Vector3(-22.5f, 0f, 40f);
+        player.transform.position = new Vector3(-20f, 2f, 35f);
         player.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
         myCamera.transform.SetParent(player.meshRenderer.transform, false);
         player.meshRenderer.transform.localRotation = new Quaternion(0f, 90f, 0f, 0f);
-        myCamera.transform.localPosition = new Vector3(0f, 2f, 5f);
+        myCamera.transform.localPosition = new Vector3(0f, 2f, 6f);
         myCamera.transform.localRotation = new Quaternion(0f, 180f, 0f, 0f);
         player.myAnim.speed = 1f;
         player.myAnim.Play("Victory");
         victoryState = true;
-        tm.maxWidthTimerLine = 0f;
     }
 
     #endregion
