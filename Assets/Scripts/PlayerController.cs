@@ -287,7 +287,6 @@ public class PlayerController : MonoBehaviour
     {
         if (other.GetComponent<Perk>() != null && CurrentPerk == null)
         {
-
             source.clip = uipClip;
             source.Play();
             Perk pickedPerk = other.GetComponent<Perk>();

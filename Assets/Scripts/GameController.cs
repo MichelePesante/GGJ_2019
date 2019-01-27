@@ -313,7 +313,7 @@ public class GameController : MonoBehaviour
         player.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
         myCamera.transform.SetParent(player.meshRenderer.transform, false);
         player.meshRenderer.transform.localRotation = new Quaternion(0f, 90f, 0f, 0f);
-        myCamera.transform.localPosition = new Vector3(0f, 2f, 6f);
+        myCamera.transform.localPosition = new Vector3(0f, 2f, 8f);
         myCamera.transform.localRotation = new Quaternion(0f, 180f, 0f, 0f);
         player.myAnim.speed = 1f;
         player.myAnim.Play("Victory");
