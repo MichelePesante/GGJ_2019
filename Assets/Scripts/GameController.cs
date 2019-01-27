@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
+    private AudioSource source;
+    public AudioClip skskClip;
+
     public List<PlayerController> PlayerPrefabList = new List<PlayerController>();
     public Camera myCamera;
     public bool victoryState;
@@ -28,6 +31,7 @@ public class GameController : MonoBehaviour
     {
         tm = FindObjectOfType<ThroneManager>();
         myCamera = FindObjectOfType<Camera>();
+        source = GetComponent<AudioSource>();
 
         List<string> playersPrefsName = new List<string> { "player1", "player2", "player3", "player4" };
 
@@ -141,6 +145,9 @@ public class GameController : MonoBehaviour
         if (Time.timeScale == 1.0f)
         {
             Time.timeScale = 0f;
+
+            source.clip = skskClip;
+            source.Play();
 
             pauseMenu.SetActive(true);
         }

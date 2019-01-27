@@ -6,6 +6,11 @@ using Random = System.Random;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Audio Clips")]
+    private AudioSource source;
+    public AudioClip uipClip;
+    public AudioClip pichiuClip;
+
     public PlayerNumber CurrentPlayerNumber;
 
     public float StartingMovementSpeed;
@@ -45,6 +50,7 @@ public class PlayerController : MonoBehaviour
         sm = GetComponent<PlayerStateMachine>();
         gameController = FindObjectOfType<GameController>();
         myAnim = GetComponent<Animator>();
+        source = GetComponent<AudioSource>();
     }
 
     void Start()
@@ -151,6 +157,9 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetButtonDown(PerkButton) && CurrentPerk != null)
         {
+            source.clip = pichiuClip;
+            source.Play();
+
             CurrentPerk.TriggerPerk(this);
             RemovePersonalPerk();
         }
@@ -278,6 +287,9 @@ public class PlayerController : MonoBehaviour
     {
         if (other.GetComponent<Perk>() != null && CurrentPerk == null)
         {
+
+            source.clip = uipClip;
+            source.Play();
             Perk pickedPerk = other.GetComponent<Perk>();
             CurrentPerk = pickedPerk;
             pickedPerk.SetImage(myPerkImage);
