@@ -20,6 +20,7 @@ public class GameController : MonoBehaviour
     public List<PlayerController> players = new List<PlayerController>();
     public List<GameObject> playerSpawnPoints = new List<GameObject>();
     public List<PerkImage> perkImages = new List<PerkImage>();
+    public List<Image> playerImages = new List<Image>();
 
     public GameObject pauseMenu;
 
@@ -37,7 +38,17 @@ public class GameController : MonoBehaviour
                 players.Add(Instantiate(PlayerPrefab, playerSpawnPoints[i].transform.position, Quaternion.identity).IdentifyPlayer(i));
                 players.FindLast(player => true).myPerkImage = perkImages[i];
             }
+            else
+            {
+                playerImages[i].gameObject.SetActive(false);
+            }
         }
+    }
+
+    private void Start()
+    {
+        menuInt = 1;
+        SwapTexts();
     }
 
     private void Update()
@@ -49,6 +60,8 @@ public class GameController : MonoBehaviour
         else if (Input.GetButtonDown("Start"))
         {
             pauseGame();
+            menuInt = 1;
+            SwapTexts();
         }
         if (Time.timeScale == 0f)
         {
@@ -65,24 +78,26 @@ public class GameController : MonoBehaviour
             if (Input.GetAxisRaw("Vertical_Player1") >= 0.9f && !oldUpTriggerHeld)
             {
                 oldUpTriggerHeld = true;
+                menuInt = (menuInt - 1 < 0) ? 0 : menuInt - 1;
                 SwapTexts();
             }
 
-            if (Input.GetAxisRaw("Vertical_Player1") <= 0.9f && !oldDownTriggerHeld)
+            if (Input.GetAxisRaw("Vertical_Player1") <= -0.9f && !oldDownTriggerHeld)
             {
                 oldDownTriggerHeld = true;
+                menuInt = (menuInt + 1 > 1) ? 1 : menuInt + 1;
                 SwapTexts();
             }
 
-            if (Input.GetButtonDown("Perk_1"))
+            if (Input.GetKeyDown(KeyCode.Joystick1Button0))
             {
                 switch (menuInt)
                 {
                     case 0:
-                        pauseGame();
+                        Application.Quit();
                         break;
                     case 1:
-                        Application.Quit();
+                        pauseGame();
                         break;
                     default:
                         break;
@@ -142,12 +157,10 @@ public class GameController : MonoBehaviour
         switch (menuInt)
         {
             case 0:
-                ResumeGameTextActive();
-                menuInt = 1;
+                ExitGameTextActive();
                 break;
             case 1:
-                ExitGameTextActive();
-                menuInt = 0;
+                ResumeGameTextActive();
                 break;
             default:
                 break;
@@ -157,13 +170,13 @@ public class GameController : MonoBehaviour
     public void ResumeGameTextActive()
     {
         Resume_Image.color = Color.white;
-        Exit_Image.color = new Color(160f, 160f, 160f, 1f);
+        Exit_Image.color = Color.gray;
     }
 
     public void ExitGameTextActive()
     {
         Exit_Image.color = Color.white;
-        Resume_Image.color = new Color(160f, 160f, 160f, 1f);
+        Resume_Image.color = Color.gray;
     }
 
     public void TriggerSlowedPerk(PlayerController perkOwner, float slowAmount, float perkDuration)
