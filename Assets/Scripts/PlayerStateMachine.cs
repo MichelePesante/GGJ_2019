@@ -11,11 +11,6 @@ public class PlayerStateMachine : MonoBehaviour {
         myAnim = GetComponent<Animator>();
     }
 
-    public void SetDoorTrigger()
-    {
-        myAnim.SetTrigger("DoorTrigger");
-    }
-
     public void SetConfusedBool(bool value)
     {
         myAnim.SetBool("IsConfused", value);

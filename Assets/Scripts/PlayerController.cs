@@ -212,7 +212,6 @@ public class PlayerController : MonoBehaviour
 
     public void OpenDoor(Collider other)
     {
-        sm.SetDoorTrigger();
         other.GetComponent<Door>().openClose();
     }
 
