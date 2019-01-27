@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 public class SelectPlayerManager : MonoBehaviour
 {
+    private AudioSource source;
+    public AudioClip ehClip;
+    public AudioClip ahClip;
+
     public BlinkText blink;
     public List<bool> players = new List<bool> { false, false, false, false };
     private List<string> actionButtonNames = new List<string> { "Perk_1", "Perk_2", "Perk_3", "Perk_4" };
@@ -16,6 +20,10 @@ public class SelectPlayerManager : MonoBehaviour
 
     int activePlayers = 0;
 
+    private void Awake() {
+        source = GetComponent<AudioSource>();
+    }
+
     void Update()
     {
         for (var i = 0; i < 4; i++)
@@ -25,12 +33,18 @@ public class SelectPlayerManager : MonoBehaviour
                 images[i].sprite = sprites[i * 2 + 1];
                 activePlayers++;
                 players[i] = true;
+
+                source.clip = ehClip;
+                source.Play();
             }
             else if (Input.GetButtonDown(actionButtonNames[i]) && players[i])
             {
                 images[i].sprite = sprites[i * 2];
                 activePlayers--;
                 players[i] = false;
+
+                source.clip = ahClip;
+                source.Play();
             }
         }
 
