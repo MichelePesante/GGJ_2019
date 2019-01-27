@@ -311,6 +311,11 @@ Prefab:
       propertyPath: m_Volume
       value: 0.35
       objectReference: {fileID: 0}
+    - target: {fileID: 82446446285318528, guid: e3b069b213c394bebada9e0e344df482,
+        type: 2}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3b069b213c394bebada9e0e344df482, type: 2}
   m_IsPrefabAsset: 0

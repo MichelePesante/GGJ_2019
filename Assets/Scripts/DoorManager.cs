@@ -7,10 +7,19 @@ public class DoorManager : MonoBehaviour
 {
     private List<Door> doors = new List<Door>();
     private bool isActiveGroup1;
+    public bool automaticDoorsOpen;
 
    private void Awake()
     {
         doors = FindObjectsOfType<Door>().ToList();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            automaticDoorsOpen = !automaticDoorsOpen;
+        }
     }
 
     public void swapDoors() 
@@ -19,12 +28,20 @@ public class DoorManager : MonoBehaviour
         {
             lockDoorsByGroup(DoorGroup.Group1);
             unlockDoorsByGroup(DoorGroup.Group2);
+            if(automaticDoorsOpen)
+            {
+                OpenUnlockedDoors();
+            }
             isActiveGroup1 = false;
         }
         else
         {
             lockDoorsByGroup(DoorGroup.Group2);
             unlockDoorsByGroup(DoorGroup.Group1);
+            if (automaticDoorsOpen)
+            {
+                OpenUnlockedDoors();
+            }
             isActiveGroup1 = true;
         }
     }
@@ -48,6 +65,14 @@ public class DoorManager : MonoBehaviour
             {
                 door.unlock();
             }
+        }
+    }
+
+    public void OpenUnlockedDoors()
+    {
+        foreach (Door door in doors)
+        {
+            door.openClose();
         }
     }
 }
