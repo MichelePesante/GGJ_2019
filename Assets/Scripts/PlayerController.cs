@@ -295,7 +295,6 @@ public class PlayerController : MonoBehaviour
     {
         if (other.GetComponent<Door>() != null && Input.GetAxisRaw(DoorButton) >= 0.9f && !oldTriggerHeld)
         {
-            print("Pressed");
             oldTriggerHeld = true;
             OpenDoor(other);
         }

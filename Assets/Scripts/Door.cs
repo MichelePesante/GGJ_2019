@@ -35,7 +35,6 @@ public class Door : MonoBehaviour
 
     public void openClose()
     {
-        print("OpenClose");
         if (!locked)
         {
             if (closed)
