@@ -98,7 +98,7 @@ public class GameController : MonoBehaviour
                 switch (menuInt)
                 {
                     case 0:
-                        Application.Quit();
+                        SceneManager.LoadScene(0);
                         break;
                     case 1:
                         pauseGame();
