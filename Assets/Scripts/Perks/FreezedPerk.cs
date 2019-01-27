@@ -11,6 +11,6 @@ public class FreezedPerk : Perk
 
     public override void SetImage(PerkImage imageToChange)
     {
-        imageToChange.SetFreezePerkImage();
+        imageToChange.SetPerkImage(this);
     }
 }

@@ -13,6 +13,6 @@ public class SlowedPerk : Perk
 
     public override void SetImage(PerkImage imageToChange)
     {
-        imageToChange.SetSlowPerkImage();
+        imageToChange.SetPerkImage(this);
     }
 }

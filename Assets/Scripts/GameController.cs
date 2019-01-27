@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
     public PlayerController PlayerPrefab;
+    public Camera myCamera;
+    public bool victoryState;
+    public ThroneManager tm;
 
     public int PlayerToSpawn;
 
@@ -16,6 +19,9 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
+        tm = FindObjectOfType<ThroneManager>();
+        myCamera = FindObjectOfType<Camera>();
+
         List<string> playersPrefsName = new List<string> { "player1", "player2", "player3", "player4" };
 
         for (var i = 0; i < 4; i++)
@@ -30,9 +36,9 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetButtonDown("Start") && victoryState)
         {
-            GoToPreviousScene();
+            SceneManager.LoadScene(0);
         }
     }
 
@@ -180,10 +186,25 @@ public class GameController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
-    public void GoToVictoryScreen()
+    public void GoToVictoryScreen(PlayerController player)
     {
-        // Vai allo screen di vittoria
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        foreach (PlayerController xplayer in players)
+        {
+            if (xplayer != player)
+            {
+                xplayer.transform.position = new Vector3 (0f, -20f, 0f);
+            }
+        }
+        player.transform.position = new Vector3(-22.5f, 0f, 40f);
+        player.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
+        myCamera.transform.SetParent(player.meshRenderer.transform, false);
+        player.meshRenderer.transform.localRotation = new Quaternion(0f, 90f, 0f, 0f);
+        myCamera.transform.localPosition = new Vector3 (0f, 2f, 5f);
+        myCamera.transform.localRotation = new Quaternion(0f, 180f, 0f, 0f);
+        player.myAnim.speed = 1f;
+        player.myAnim.Play("Victory");
+        victoryState = true;
+        tm.maxWidthTimerLine = 0f;
     }
 
     #endregion

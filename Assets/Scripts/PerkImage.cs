@@ -12,29 +12,10 @@ public class PerkImage : MonoBehaviour {
         image = GetComponent<Image>();
     }
 
-    public void SetFreezePerkImage()
+    public void SetPerkImage(Perk myPerk)
     {
-        image.color = Color.cyan;
-    }
-
-    public void SetSlowPerkImage()
-    {
-        image.color = Color.red;
-    }
-
-    public void SetFastPerkImage()
-    {
-        image.color = Color.gray;
-    }
-
-    public void SetConfusePerkImage()
-    {
-        image.color = Color.yellow;
-    }
-
-    public void SetThronePerkImage()
-    {
-        image.color = Color.green;
+        image.color = Color.white;
+        image.sprite = myPerk.image.sprite;
     }
 
     public void SetNonePerkImage()

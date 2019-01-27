@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private float currentMovementSpeed;
 
     private bool oldTriggerHeld;
+    public Animator myAnim;
 
     public ConfusionType CurrentConfusionType;
 
@@ -29,7 +30,7 @@ public class PlayerController : MonoBehaviour
     private string VerticalAxis;
     private string PerkButton;
 
-    private MeshRenderer meshRenderer;
+    public MeshRenderer meshRenderer;
     private PlayerStateMachine sm;
 
     [Header("Perks Bool")]
@@ -43,6 +44,7 @@ public class PlayerController : MonoBehaviour
         meshRenderer = GetComponentInChildren<MeshRenderer>();
         sm = GetComponent<PlayerStateMachine>();
         gameController = FindObjectOfType<GameController>();
+        myAnim = GetComponent<Animator>();
     }
 
     void Start()
@@ -81,33 +83,16 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        MovePlayer(HorizontalAxis, VerticalAxis);
-
-        if (Input.GetKeyDown(KeyCode.E))
+        if (!gameController.victoryState)
         {
-            EnableFreezedPerk();
-        }
+            MovePlayer(HorizontalAxis, VerticalAxis);
 
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            EnableConfusedPerk();
-        }
+            UsePerk();
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            EnableSlowedPerk(1);
-        }
-
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            EnableFasterPerk(1);
-        }
-
-        UsePerk();
-
-        if(Input.GetAxisRaw(DoorButton) <= 0)
-        {
-            oldTriggerHeld = false;
+            if (Input.GetAxisRaw(DoorButton) <= 0)
+            {
+                oldTriggerHeld = false;
+            }
         }
     }
 
@@ -302,7 +287,7 @@ public class PlayerController : MonoBehaviour
 
         if (other.GetComponent<Throne>() != null && other.GetComponent<Throne>().isActive)
         {
-            gameController.GoToVictoryScreen();
+            gameController.GoToVictoryScreen(this);
         }
     }
 

@@ -11,6 +11,6 @@ public class ThronePerk : Perk
 
     public override void SetImage(PerkImage imageToChange)
     {
-        imageToChange.SetThronePerkImage();
+        imageToChange.SetPerkImage(this);
     }
 }

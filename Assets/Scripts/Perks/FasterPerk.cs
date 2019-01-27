@@ -13,6 +13,6 @@ public class FasterPerk : Perk
 
     public override void SetImage(PerkImage imageToChange)
     {
-        imageToChange.SetFastPerkImage();
+        imageToChange.SetPerkImage(this);
     }
 }

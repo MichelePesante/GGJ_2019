@@ -11,6 +11,6 @@ public class ConfusedPerk : Perk
 
     public override void SetImage(PerkImage imageToChange)
     {
-        imageToChange.SetConfusePerkImage();
+        imageToChange.SetPerkImage(this);
     }
 }
