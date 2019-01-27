@@ -17,6 +17,8 @@ public class GameController : MonoBehaviour
     public List<GameObject> playerSpawnPoints = new List<GameObject>();
     public List<PerkImage> perkImages = new List<PerkImage>();
 
+    public GameObject pauseMenu;
+
     private void Awake()
     {
         tm = FindObjectOfType<ThroneManager>();
@@ -39,6 +41,9 @@ public class GameController : MonoBehaviour
         if (Input.GetButtonDown("Start") && victoryState)
         {
             SceneManager.LoadScene(0);
+        }
+        else if(Input.GetButtonDown("Start")) {
+            pauseGame();
         }
     }
 
@@ -70,6 +75,19 @@ public class GameController : MonoBehaviour
         }
 
         StartCoroutine(CheckConfusedPerk(perkOwner, timer, perkDuration));
+    }
+
+    public void pauseGame() {
+        if(Time.timeScale == 1.0f) {
+            Time.timeScale = 0f;
+
+            pauseMenu.SetActive(true);
+        }
+        else {
+            Time.timeScale = 1.0f;
+
+            pauseMenu.SetActive(false);
+        }
     }
 
     public void TriggerSlowedPerk(PlayerController perkOwner, float slowAmount, float perkDuration)
