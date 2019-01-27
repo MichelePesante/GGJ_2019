@@ -11,8 +11,6 @@ public class GameController : MonoBehaviour
     public bool victoryState;
     public ThroneManager tm;
 
-    public int PlayerToSpawn;
-
     public List<PlayerController> players = new List<PlayerController>();
     public List<GameObject> playerSpawnPoints = new List<GameObject>();
     public List<PerkImage> perkImages = new List<PerkImage>();
