@@ -10,6 +10,8 @@ public enum DoorGroup
 
 public class Door : MonoBehaviour
 {
+    private AudioSource source;
+
     private Animator myAnim;
     public DoorGroup group;
 
@@ -19,6 +21,7 @@ public class Door : MonoBehaviour
     private void Awake()
     {
         myAnim = GetComponent<Animator>();
+        source = GetComponent<AudioSource>();
 
         switch (gameObject.tag)
         {
@@ -52,6 +55,8 @@ public class Door : MonoBehaviour
     {
         closed = false;
         myAnim.Play("OpenDoor");
+
+        source.Play();
     }
 
     private void close()
