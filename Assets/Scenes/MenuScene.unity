@@ -711,7 +711,7 @@ MonoBehaviour:
   - {fileID: 415968980}
   - {fileID: 1081591519}
   - {fileID: 1284442308}
-  chickClip: {fileID: 0}
+  chickClip: {fileID: 8300000, guid: ace2a88ff72fa4dde9189930f0c5ca6c, type: 3}
 --- !u!4 &1329583215
 Transform:
   m_ObjectHideFlags: 0

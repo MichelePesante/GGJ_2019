@@ -16,6 +16,10 @@ public class StartController : MonoBehaviour {
     private AudioSource source;
     public AudioClip chickClip;
 
+    private void Awake() {
+        source = GetComponent<AudioSource>();
+    }
+
     void Update ()
     {
         if (Input.GetAxisRaw("Horizontal_Player1") <= 0)
