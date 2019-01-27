@@ -11,6 +11,7 @@ public class ThroneManager : MonoBehaviour {
     public Vector3 timerLineStartPosition;
     private Vector3 timerLineEndPosition;
     public float maxWidthTimerLine;
+	private DoorManager dm;
 
 	public float duration;
 
@@ -18,6 +19,7 @@ public class ThroneManager : MonoBehaviour {
 
 	private void Awake() {
 		thrones = FindObjectsOfType<Throne>().ToList();
+		dm = FindObjectOfType<DoorManager>();
 
 		timerLine = GetComponentInChildren<LineRenderer>();
 
@@ -51,6 +53,7 @@ public class ThroneManager : MonoBehaviour {
 				rndThrone = thrones[rnd.Next(0, thrones.Count)];
 			} while(rndThrone.isActive == true);
 			
+			dm.swapDoors();
 			timerLine.transform.SetParent(rndThrone.gameObject.transform, false);
 			rndThrone.Activate();
 			DeactivateOtherThrones(rndThrone);
