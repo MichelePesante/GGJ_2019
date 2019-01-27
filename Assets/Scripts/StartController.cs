@@ -8,7 +8,7 @@ public class StartController : MonoBehaviour {
 
     public int menuSelection;
     public bool oldRightTriggerHeld;
-    public bool OldLeftTriggerHeld;
+    public bool oldLeftTriggerHeld;
     public Image PanelImage;
     public bool inCreditsPanel;
     public List<Light> lights;
@@ -22,7 +22,7 @@ public class StartController : MonoBehaviour {
 
         if (Input.GetAxisRaw("Horizontal_Player1") >= 0)
         {
-            OldLeftTriggerHeld = false;
+            oldLeftTriggerHeld = false;
         }
 
         if (Input.GetAxisRaw("Horizontal_Player1") >= 0.9f && !oldRightTriggerHeld && !inCreditsPanel)
@@ -37,9 +37,9 @@ public class StartController : MonoBehaviour {
             lights[menuSelection].enabled = true;
         }
 
-        if (Input.GetAxisRaw("Horizontal_Player1") <= -0.9f && !OldLeftTriggerHeld && !inCreditsPanel)
+        if (Input.GetAxisRaw("Horizontal_Player1") <= -0.9f && !oldLeftTriggerHeld && !inCreditsPanel)
         {
-            OldLeftTriggerHeld = true;
+            oldLeftTriggerHeld = true;
             menuSelection--;
             if (menuSelection < 0)
             {
