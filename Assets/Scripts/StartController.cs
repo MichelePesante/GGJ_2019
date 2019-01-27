@@ -13,6 +13,9 @@ public class StartController : MonoBehaviour {
     public bool inCreditsPanel;
     public List<Light> lights;
 
+    private AudioSource source;
+    public AudioClip chickClip;
+
     void Update ()
     {
         if (Input.GetAxisRaw("Horizontal_Player1") <= 0)
@@ -35,6 +38,8 @@ public class StartController : MonoBehaviour {
             }
             ResetAllLights();
             lights[menuSelection].enabled = true;
+
+            playChick();
         }
 
         if (Input.GetAxisRaw("Horizontal_Player1") <= -0.9f && !oldLeftTriggerHeld && !inCreditsPanel)
@@ -47,6 +52,8 @@ public class StartController : MonoBehaviour {
             }
             ResetAllLights();
             lights[menuSelection].enabled = true;
+
+            playChick();
         }
 
         if (Input.GetButtonDown("Start"))
@@ -60,6 +67,8 @@ public class StartController : MonoBehaviour {
                 PanelImage.gameObject.SetActive(false);
                 inCreditsPanel = false;
             }
+
+            playChick();
         }
     }
 
@@ -88,5 +97,10 @@ public class StartController : MonoBehaviour {
         {
             light.enabled = false;
         }
+    }
+
+    private void playChick() {
+        source.clip = chickClip;
+        source.Play();
     }
 }
