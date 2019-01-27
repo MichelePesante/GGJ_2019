@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    public PlayerController PlayerPrefab;
+    public List<PlayerController> PlayerPrefabList = new List<PlayerController>();
     public Camera myCamera;
     public bool victoryState;
     public ThroneManager tm;
@@ -35,7 +35,7 @@ public class GameController : MonoBehaviour
         {
             if (PlayerPrefs.GetInt(playersPrefsName[i]) == 1)
             {
-                players.Add(Instantiate(PlayerPrefab, playerSpawnPoints[i].transform.position, Quaternion.identity).IdentifyPlayer(i));
+                players.Add(Instantiate(PlayerPrefabList[i], playerSpawnPoints[i].transform.position, Quaternion.identity).IdentifyPlayer(i));
                 players.FindLast(player => true).myPerkImage = perkImages[i];
             }
             else
