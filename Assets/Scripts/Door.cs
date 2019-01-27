@@ -64,6 +64,8 @@ public class Door : MonoBehaviour
     public void setLocked()
     {
         locked = true;
+        if(!closed)
+            close();
     }
 
     public void unlock()
